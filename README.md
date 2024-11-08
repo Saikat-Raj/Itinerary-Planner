@@ -19,9 +19,34 @@ A Django-based application for planning and booking itineraries with collaborati
    conda env create -f environment.yml
    conda activate itinerary-planner
 
-4. **Set up the database:**
+4. **Set up the MySQL database:**
++ Open the MySQL command line or MySQL Workbench and run:
+
+   ```bash
+   CREATE DATABASE itinerary_planner;
+   CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+   GRANT ALL PRIVILEGES ON itinerary_planner.* TO 'admin'@'localhost';
+   FLUSH PRIVILEGES;
+
++ Update your settings.py file in Django to configure the MySQL database:
+   ```bash
+   DATABASES = 
+   {
+    'default': 
+    {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'itinerary_planner',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+   }
+
+5. **Apply migrations:**
    ```bash
    python manage.py migrate
+
 
 5. **Create a superuser (optional, for admin access):**
    ```bash
